@@ -37,5 +37,23 @@ use Gerardojbaez\PhpCheckup\Repositories\Php\Config\Config;
 
 // 50MB minimum
 $memory = new MinimumMemory(1024 * 50, new Config);
-$data = $memory->data(); // E.g., ['memory_limit' => '-1']
+```
+
+## Minimum Semantic Version
+
+Use `Gerardojbaez\PhpCheckup\Checks\MinimumSemver` when checking for a minimum [semantic version](https://semver.org/). For example, you can use this check to make sure PHP version meets a minimum target version.
+
+The constructor accepts two `string` arguments, the first argument is the target version, the second argument is the current version to test; if you are testing for a minimum PHP version, use  `phpversion()`.
+
+This check returns formatting data with the following values:
+
+- `target_version`: The target minimum version.
+- `current_version`: The current version being tested.
+
+Example:
+
+```php
+use Gerardojbaez\PhpCheckup\Checks\MinimumSemver;
+
+$memory = new MinimumSemver('7.2.0', phpversion());
 ```
