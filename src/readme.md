@@ -24,7 +24,7 @@ $checks = new Manager;
 $checks->add(
     (new Check('Required PHP extension "mbstring" is installed', new ExtensionIsLoaded('mbstring')))
         ->group('requirements')
-        ->passing('The extension installed')
+        ->passing('The extension is installed')
         ->failing('The extension is not installed. Please install or enable it before proceeding.')
         ->critical()
 );
