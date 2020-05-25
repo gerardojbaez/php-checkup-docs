@@ -1,7 +1,7 @@
 module.exports = {
     title: 'PHP Checkup',
     description: 'Framework agnostic application health and requirement checks.',
-    base: "/php-checkup/",
+    base: "/php-checkup-docs/",
     dest: './docs',
     themeConfig: {
         nav: [
