@@ -1,6 +1,6 @@
 # Built-in checks
 
-These are the built-in checks included with PHP Checkup; along with their configuration options which can vary from check to check. To learn how to *register* and *use* any of these checks, take a look at [this guide](/usage/check-list.html).
+These are the built-in checks included with PHP Checkup; along with their configuration options which may vary from check to check. To learn how to *register* and *use* any of these checks, take a look at [this guide](/usage/check-list.html).
 
 ## PHP Extension Loaded
 
