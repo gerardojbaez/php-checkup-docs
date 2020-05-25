@@ -21,22 +21,22 @@ $mailparse = new ExtensionIsLoaded('mailparse');
 
 ## PHP Minimum Memory Limit
 
-Use `Gerardojbaez\PhpCheckup\Checks\Php\MinimumMemory` when checking for a minimum of PHP's Memory Limit.
+Use `Gerardojbaez\PhpCheckup\Checks\Php\MinimumMemory` when checking for a minimum of [PHP's Memory Limit](https://www.php.net/manual/en/ini.core.php#ini.memory-limit).
 
-The constructor accepts two arguments, the first one is an `int` representing the minimum bytes to check, the second argument is an instance of `Gerardojbaez\PhpCheckup\Contracts\Repositories\Php\Config\Repository`, which can be `Gerardojbaez\PhpCheckup\Repositories\Php\Config\Config`.
+The constructor accepts two arguments, the first one is an `int` representing the minimum bytes to check, the second argument is a `string` representing the current `memory_limit` value (i.e., `ini_get('memory_limit')`).
 
 This check returns formatting data with the following values:
 
+- `target_memory`: The target minimum memory limit.
 - `memory_limit`: The memory limit currently set.
 
 Example:
 
 ```php
 use Gerardojbaez\PhpCheckup\Checks\Php\MinimumMemory;
-use Gerardojbaez\PhpCheckup\Repositories\Php\Config\Config;
 
 // 50MB minimum
-$memory = new MinimumMemory(1024 * 50, new Config);
+$memory = new MinimumMemory(1024 * 50, ini_get('memory_limit'));
 ```
 
 ## Minimum Semantic Version
