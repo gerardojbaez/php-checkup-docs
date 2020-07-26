@@ -6,17 +6,34 @@ First, define your check by constructing a `\Gerardojbaez\PhpCheckup\Check` inst
 
 ```php
 use \Gerardojbaez\PhpCheckup\Check;
-use \Gerardojbaez\PhpCheckup\Checks\Php\ExtensionIsLoaded;
+use \Gerardojbaez\PhpCheckup\Checks\MinimumVersion;
 
-$check = new Check('"mbstring" is loaded', new ExtensionIsLoaded('mbstring'));
+$check = new Check('PHP v7.2.0 or newer', new MinimumVersion('7.2.0', phpversion()));
 ```
 
-Optionally customize the check's type, success, and fail message:
+Set the severity of the check:
+
+- `critical` for critical checks that needs immediate attention; this is the default check type.
+- `warning` for checks that are just warnings, and does not require immediate attention.
+- `informational` for checks that are just for informational purposes.
+
+Example:
 
 ```php
 $check->critical();
-$check->passing('"mbstring" is loaded');
-$check->failing('Please make sure "mbstring" is installed and enabled');
+```
+
+Optionally customize the check's passing and failing messages. If a check returns formatting data, use it to dynamically format both messages:
+
+```php
+$check->passing('You are using PHP :current_version');
+$check->failing('Upgrade your PHP version to :target_version or newer.');
+```
+
+Optionally add the check to a group:
+
+```php
+$check->group('requirements');
 ```
 
 Finally, register your check with the check's manager:

@@ -57,3 +57,19 @@ use Gerardojbaez\PhpCheckup\Checks\MinimumSemver;
 
 $memory = new MinimumSemver('7.2.0', phpversion());
 ```
+
+## File or Directory Writable
+
+Use `Gerardojbaez\PhpCheckup\Checks\Filesystem\Writable` when checking whether a file or directory is writable.
+
+The constructor accepts one argument, which is a `string` representing the file or directory path you are checking.
+
+This check doesn't return any formatting data.
+
+Example:
+
+```php
+use Gerardojbaez\PhpCheckup\Checks\Filesystem\Writable;
+
+$storage = new Writable('/var/www/html/storage');
+```
