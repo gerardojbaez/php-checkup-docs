@@ -2,7 +2,7 @@
 
 ## Build your checklist
 
-First, define your check by constructing a `\Gerardojbaez\PhpCheckup\Checks` instance:
+First, define your check by constructing a `\Gerardojbaez\PhpCheckup\Check` instance:
 
 ```php
 use \Gerardojbaez\PhpCheckup\Check;
