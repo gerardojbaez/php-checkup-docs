@@ -73,3 +73,19 @@ use Gerardojbaez\PhpCheckup\Checks\Filesystem\Writable;
 
 $storage = new Writable('/var/www/html/storage');
 ```
+
+## File or Directory Readable
+
+Use `Gerardojbaez\PhpCheckup\Checks\Filesystem\Readable` when checking whether a file or directory is readable.
+
+The constructor accepts one argument, which is a `string` representing the file or directory path you are checking.
+
+This check doesn't return any formatting data.
+
+Example:
+
+```php
+use Gerardojbaez\PhpCheckup\Checks\Filesystem\Readable;
+
+$key = new Readable('/var/www/html/storage/private.key');
+```
