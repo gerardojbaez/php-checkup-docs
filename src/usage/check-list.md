@@ -36,37 +36,84 @@ Optionally add the check to a group:
 $check->group('requirements');
 ```
 
+Optionally set a check's dependency so checks will only be executed when other checks are passing:
+
+```php
+$connectionCheck->code('db-connection');
+$check->dependsOn('db-connection', 'Waiting for a working database connection...');
+```
+
+When adding a dependency, always make sure to assign unique codes to each of the parents checks.
+
 Finally, register your check with the check's manager:
 
 ```php
 use \Gerardojbaez\PhpCheckup\Manager;
 
-$checks = new Manager;
-$checks->add($check);
+$manager = new Manager;
+$manager->add($check);
 ```
 
 ## Run your checklist
 
-To run a checklist, simply call the `isPassing()` method of the manager's instance, this method will return `true` when all checks are passing, or `false` otherwise:
+To run a checklist, create a new instance of `\Gerardojbaez\PhpCheckup\Runner` and call `run()`, this method will return an instance of `\Gerardojbaez\PhpCheckup\RunResult`:
 
 ```php
-$manager->isPassing(); // true or false
+use \Gerardojbaez\PhpCheckup\Runner;
+
+$runner = new Runner($manager);
+$result = $runner->run();
 ```
 
-Alternatively, you can use the `passing()` method of a manager's instance to get a count of passing checks. For example, if you have 5 checks registered, and only two are passing, 2 is returned.
+To check whether the list is passing or not, simply use the following status methods:
 
 ```php
-$manager->passing(); // 1, 2, 3, etc...
+$result->isPassing(); // returns true when all checks are passing
+$result->isFailing(); // returns true when at least one check is failing
+$result->isSkipping(); // returns true when at least one check is being skipped
 ```
 
-If you only want to run checks of a particular group, use the `group($name)` method of a manager's instance:
+To retrieve a list of check results:
 
 ```php
-$manager->group('requirements')->isPassing();
+$result->getCheckResults(); // returns all check results
+$result->getPassingChecks(); // returns all passing check results
+$result->getFailingChecks(); // returns all failing check results
+$result->getSkippingChecks(); // returns all skipping check results
+```
+
+You can also retrieve the count of checks:
+
+```php
+$result->getPassingCount(); // returns the count of passing checks
+$result->getFailingCount(); // returns the count of failing checks
+$result->getSkippinCount(); // returns the count of skipping checks
+```
+
+If you only want to run checks of a particular group, use the `group($name)` method of a manager's instance, and pass that instance to the runner:
+
+```php
+$runner = new Runner($manager->group('requirements'));
+$result = $runner->run();
 ```
 
 Alternatively, if you want to check multiple groups at once, simply use `groups([$one, two, ...])`:
 
 ```php
-$manager->groups(['requirements', 'security'])->isPassing();
+$runner = new Runner($manager->groups(['requirements', 'security']));
+$result = $runner->run();
+```
+
+If you ware looking to run checks by their code:
+
+```php
+$runner = new Runner($manager->code('some-code'));
+$result = $runner->run();
+```
+
+Or multiple codes:
+
+```php
+$runner = new Runner($manager->codes('some-code'));
+$result = $runner->run();
 ```

@@ -17,11 +17,12 @@ footer: MIT Licensed | Copyright © 2020 Gerardo J. Báez
 ```php
 use \Gerardojbaez\PhpCheckup\Checks\Php\ExtensionIsLoaded;
 use \Gerardojbaez\PhpCheckup\Manager;
+use \Gerardojbaez\PhpCheckup\Runner;
 
-$checks = new Manager;
+$manager = new Manager;
 
 // Register checks
-$checks->add(
+$manager->add(
     (new Check('Required PHP extension "mbstring" is installed', new ExtensionIsLoaded('mbstring')))
         ->group('requirements')
         ->passing('The extension is installed')
@@ -30,5 +31,6 @@ $checks->add(
 );
 
 // Run checks
-$checks->isPassing();
+$runner = new Runner($manager);
+$runner->run()->isPassing();
 ```
