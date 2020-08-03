@@ -31,6 +31,6 @@ $manager->add(
 );
 
 // Run checks
-$runner = new Runner($manager);
-$runner->run()->isPassing();
+$runner = new Runner();
+$runner->run($manager)->isPassing();
 ```

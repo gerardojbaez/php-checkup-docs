@@ -61,8 +61,8 @@ To run a checklist, create a new instance of `\Gerardojbaez\PhpCheckup\Runner` a
 ```php
 use \Gerardojbaez\PhpCheckup\Runner;
 
-$runner = new Runner($manager);
-$result = $runner->run();
+$runner = new Runner();
+$result = $runner->run($manager);
 ```
 
 To check whether the list is passing or not, simply use the following status methods:
@@ -93,27 +93,27 @@ $result->getSkippinCount(); // returns the count of skipping checks
 If you only want to run checks of a particular group, use the `group($name)` method of a manager's instance, and pass that instance to the runner:
 
 ```php
-$runner = new Runner($manager->group('requirements'));
-$result = $runner->run();
+$runner = new Runner();
+$result = $runner->run($manager->group('requirements'));
 ```
 
 Alternatively, if you want to check multiple groups at once, simply use `groups([$one, two, ...])`:
 
 ```php
-$runner = new Runner($manager->groups(['requirements', 'security']));
-$result = $runner->run();
+$runner = new Runner();
+$result = $runner->run($manager->groups(['requirements', 'security']));
 ```
 
 If you ware looking to run checks by their code:
 
 ```php
-$runner = new Runner($manager->code('some-code'));
-$result = $runner->run();
+$runner = new Runner();
+$result = $runner->run($manager->code('some-code'));
 ```
 
 Or multiple codes:
 
 ```php
-$runner = new Runner($manager->codes('some-code'));
-$result = $runner->run();
+$runner = new Runner();
+$result = $runner->run($manager->codes('some-code'));
 ```
